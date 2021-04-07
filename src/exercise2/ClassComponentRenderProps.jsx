@@ -8,7 +8,7 @@ import {
   Spinner,
   Button,
 } from '@chakra-ui/react';
-// import { UseRandomImage } from './useRandomImage';
+import { UseRandomImage } from './useRandomImage';
 
 class ClassComponentRenderProps extends Component {
   constructor(props) {
@@ -24,28 +24,17 @@ class ClassComponentRenderProps extends Component {
         <Heading as='h3' mb={2}>
           Part 2 (RenderProps)
         </Heading>
-        <Text mb={2}>
-          Create and export a new component in <Code>useRandomImage.jsx</Code>`
-          that implements the render props pattern.
-        </Text>
-        <Text mb={2}>
-          Refactor this component{' '}
-          <Code colorScheme='yellow'>
-            src/exercise2/ClassComponentRenderProps.jsx
-          </Code>{' '}
-          to implement the <Code>useRandomImage hook</Code> making use of your
-          render props component export that work in a class
-        </Text>
-        <Text>
-          Tip: Check out how we did this in the example in{' '}
-          <Code>useDocumentTitle.jsx</Code>
-        </Text>
-        {/* Use the return from your hook here for the image src! Also, add your reload button ;-) */}
 
-        <Image />
-
-        <Box height='150px' width='150px' border='1px solid red' />
-        {/* Feel free to remove this box ^^ ;-) */}
+        <UseRandomImage>
+          {({ imageUrl, loading, error, toggle }) => (
+            <>
+              <Image src={imageUrl} />
+              <Button onClick={toggle}>
+                {loading ? <Spinner /> : 'Change Image'}
+              </Button>
+            </>
+          )}
+        </UseRandomImage>
       </Box>
     );
   }

@@ -32,14 +32,26 @@ const useRandomImage = () => {
 };
 
 // render props for use in class component
-const UseRandomImage = () => {
-  // need to do some coding here 😎
+const UseRandomImage = ({ children }) => {
+  const { imageUrl, loading, error, toggle } = useRandomImage();
+  return children({ imageUrl, loading, error, toggle });
 };
 
 // HOC for use in class component
-const withuseRandomImage = () => {
-  // need to do some coding here 😎
-  // Tip: remember that a HOC is a function that takes a component as an arg and returns another component
+const withUseRandomImage = Component => {
+  const WrappedComponent = props => {
+    const { imageUrl, loading, error, toggle } = useRandomImage();
+    return (
+      <Component
+        imageUrl={imageUrl}
+        loading={loading}
+        error={error}
+        toggle={toggle}
+        {...props}
+      />
+    );
+  };
+  return WrappedComponent;
 };
 
 // Tasks for this file:
@@ -47,4 +59,4 @@ const withuseRandomImage = () => {
 // 2. Write out and export a component that implements useRandomImage as a Component that uses Render Props pattern (and use it inside ClassComponentRenderProps )
 // 3. Write out and export a function that implements useRandomImage and exposes it as an HOC (higher order component), and then import and use your HOC in ClassComponentHOC
 
-export { useRandomImage as default, UseRandomImage, withuseRandomImage };
+export { useRandomImage as default, UseRandomImage, withUseRandomImage };

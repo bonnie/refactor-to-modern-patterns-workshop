@@ -9,7 +9,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <CounterProvider>
-        <App />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </CounterProvider>
     </ChakraProvider>
   </React.StrictMode>,
